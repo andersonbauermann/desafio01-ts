@@ -18,14 +18,27 @@ export abstract class DioAccount {
     return this.name
   }
 
-  deposit = (): void => {
+  deposit = (value: number): void => {
     if(this.validateStatus()){
-      console.log('Voce depositou')
+      if (value > 0) {
+        this.balance += value
+        console.log(`Depósito no valor de R$ ${value} efetuado com sucesso!`)
+      } else {
+        console.log('Valor de depósito inválido!')
+      }      
     }
   }
 
-  withdraw = (): void => {
-    console.log('Voce sacou')
+  withdraw = (value: number): void => {
+    if(this.validateStatus()) {
+      if (value <= this.balance) {
+        this.balance -= value
+        console.log(`Saque no valor dr R$ ${value} efetuado com sucesso!`)
+      } else {
+        console.log('Saldo insuficiênte para saque. ')
+      }
+    }
+
   }
 
   getBalance = (): void => {
